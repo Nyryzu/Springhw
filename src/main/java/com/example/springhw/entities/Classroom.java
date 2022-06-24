@@ -14,21 +14,19 @@ import java.util.Set;
 @ToString
 @Table(name = Classroom.TBL_name)
 
-public class Classroom {
+public class Classroom extends AbstractEntity<Long>{
     public static final String TBL_name = "classrooms";
-    public static final String FLD_id = "class_id";
+    public static final String FLD_id = "classroomId";
     public static final String FLD_enrolledStu = "class_students";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name =FLD_id ,updatable = false,nullable = false,unique = true)
-    private Long id;
-
+    @Column
     @OneToMany
     @JoinTable(name = FLD_enrolledStu,
             joinColumns = @JoinColumn(name = FLD_id),
             inverseJoinColumns = @JoinColumn(name = Student.FLD_id))
     private Set<Student> enrolledStudents = new java.util.LinkedHashSet<>();
 
-
+    public void setEnrolledStudents(Student student) {
+        this.enrolledStudents.add(student);
+    }
 }

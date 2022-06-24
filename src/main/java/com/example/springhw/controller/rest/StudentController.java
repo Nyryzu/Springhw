@@ -1,5 +1,4 @@
-package com.example.springhw.controller;
-
+package com.example.springhw.controller.rest;
 
 import com.example.springhw.Constants;
 import com.example.springhw.entities.Student;
@@ -59,7 +58,7 @@ public class StudentController {
         Student s=this.service.getById(studentId);
         if (s==null)
             return ResponseEntity.notFound().build();
-        this.service.delete(s);
+        this.service.deleteById(studentId);
         return ResponseEntity.ok().build();
     }
 }

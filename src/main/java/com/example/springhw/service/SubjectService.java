@@ -1,6 +1,7 @@
 package com.example.springhw.service;
 
 
+import com.example.springhw.entities.Student;
 import com.example.springhw.entities.Subject;
 import com.example.springhw.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,14 @@ import java.util.List;
 
         public SubjectService(@Autowired SubjectRepository repository){
             this.repository=repository;
-
         }
 
         public List<Subject> getAllSubjects(){
             return this.repository.findAll();
         }
-
+        public List<Student> getRegisteredStudents(Subject subject){
+            return (List<Student>) this.repository.getById(subject.getId()).getRegisteredStudents();
+        }
         public Subject getById(long id){
             return this.repository.getById(id);
         }
@@ -39,8 +41,8 @@ import java.util.List;
             return subject==null ? null : this.repository.save(subject);
         }
 
-        public void delete(Subject sb){
-            this.repository.delete(sb);
+        public void delete(Long id){
+            this.repository.delete(this.repository.getById(id));
         }
 
         public Page<Subject> getPaginated(Pageable page){

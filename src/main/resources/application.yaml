@@ -1,0 +1,30 @@
+
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:hw
+    driverClassName: org.h2.Driver
+    username: sa
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    properties:
+      hibernate:
+        show_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    web: debug
+    org:
+      hibernate: info
+
+
